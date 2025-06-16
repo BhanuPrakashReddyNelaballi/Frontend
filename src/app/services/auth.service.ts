@@ -1,5 +1,5 @@
 import { Injectable} from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { RegisterRequestDto } from "../models/user.model";
 import { AuthResponseDto } from "../models/auth-response.model";
@@ -22,7 +22,11 @@ export class AuthService{
             );
           }
     getProfile(): Observable<MemberProfile> {
-            // JWT should already be attached via interceptor or headers
-        return this.http.get<MemberProfile>(`${this.baseUrl}/profile`);
-        }
+  const token = localStorage.getItem('token'); // or sessionStorage
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`
+  });
+
+  return this.http.get<MemberProfile>(`${this.baseUrl}/profile`, { headers });
+}
 }
