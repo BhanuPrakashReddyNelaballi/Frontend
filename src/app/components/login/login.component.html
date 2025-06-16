@@ -1,0 +1,24 @@
+<div class="form-container">
+    <h2>Login</h2>
+    <div *ngIf="formSubmitted && loginForm.invalid" class="error-message">
+       Some required fields are missing. Please fill them before submitting.
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <label>Email</label>
+      <input formControlName="email" type="email" />
+      <div *ngIf="f.email.touched && f.email.invalid" class="error">
+        <div *ngIf="f.email.errors?.['required']">Email is required.</div>
+        <div *ngIf="f.email.errors?.['email']">Enter a valid email.</div>
+      </div>
+   
+      <label>Password</label>
+      <input formControlName="password" type="password" />
+      <div *ngIf="f.password.touched && f.password.invalid" class="error">Password is required.</div>
+   
+      <button type="submit" [disabled]="loading">{{ loading ? 'Logging in…' : 'Login' }}</button>
+    </form>
+    <p class="switch-link">Don't have a account? <a routerLink="/register">Register here</a>
+    </p>
+    <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+  </div>

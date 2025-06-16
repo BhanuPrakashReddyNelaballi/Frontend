@@ -1,0 +1,59 @@
+<div class="register-container">
+    <h2>Create Your Account</h2>
+    <div *ngIf="formSubmitted && registerForm.invalid" class="error-message">
+       Some required fields are missing. Please fill them before submitting.
+    </div>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+   
+      <!-- Name -->
+      <label for="name">Name</label>
+      <input id="name" type="text" formControlName="name" />
+      <div *ngIf="f.name.touched && f.name.invalid" class="error">
+        Name is required.
+      </div>
+
+      <label for="email">Email</label>
+      <input id="email" type="email" formControlName="email"/>
+      <div *ngIf="f.email.touched && f.email.invalid" class="error">
+        <div *ngIf="f.email.errors?.required">Enter a valid email.</div>
+        <div *ngIf="f.email.errors?.email">Enter a valid email</div>
+      </div>
+   
+      <label for="phone">Phone</label>
+      <input id="phone" type="text" formControlName="phone" />
+      <div *ngIf="f.phone.touched && f.phone.invalid" class="error">
+        Phone number is required.
+      </div>
+
+      <label for="address">Address</label>
+      <input id="address" type="text" formControlName="address" />
+      <div *ngIf="f.address.touched && f.address.invalid" class="error">
+        Address is required.
+      </div>
+   
+      <!-- Password -->
+      <label for="password">Password</label>
+      <input id="password" type="password" formControlName="password" />
+      <div *ngIf="f.password.touched && f.password.invalid" class="error">
+        <div *ngIf="f.password.errors?.required">Password is required.</div>
+        <div *ngIf="f.password.errors?.minlength">Minimum 8 characters.</div>
+      </div>
+   
+      <!-- Confirm Password -->
+      <label for="confirmPassword">Confirm Password</label>
+      <input id="confirmPassword" type="password" formControlName="confirmPassword" />
+      <div *ngIf="registerForm.errors?.['passwordMismatch'] && f.confirmPassword.touched" class="error">
+        Passwords must match.
+      </div>
+   
+      <!-- Submit -->
+      <button type="submit" [disabled]="loading">
+        {{ loading ? 'Registering...' : 'Register' }}
+      </button>
+    </form>
+    <p class="switch-link">Already have a account? <a routerLink="/login">Login here</a>
+    </p>
+    <!-- Feedback -->
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+    <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
+  </div>

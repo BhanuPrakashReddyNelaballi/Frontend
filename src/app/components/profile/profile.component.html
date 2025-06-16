@@ -1,0 +1,32 @@
+<div class="profile-container" *ngIf="!loading; else loadingTpl">
+  <h2>{{member.name}} Profile</h2>
+
+  <div class="profile-details">
+    <div class="profile-row">
+      <p class="label">Member ID:</p><p class="value">{{ member.id }}</p>
+    </div>
+    <div class="profile-row">
+      <p class="label">Name:</p><p class="value">{{ member.name }}</p>
+    </div>
+    <div class="profile-row">
+      <p class="label">Email:</p><p class="value">{{ member.email }}</p>
+    </div>
+    <div class="profile-row">
+      <p class="label">Phone:</p><p class="value">{{ member.phone }}</p>
+    </div>
+    <div class="profile-row">
+      <p class="label">Address:</p><p class="value">{{ member.address }}</p>
+    </div>
+    <div class="profile-row">
+      <p class="label">Membership Status:</p><p class="value">{{ member.membershipStatus }}</p>
+    </div>
+  </div>
+
+  <button routerLink="/dashboard">Dashboard</button>
+
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+</div>
+
+<ng-template #loadingTpl>
+  <p>Loading profile...</p>
+</ng-template>
