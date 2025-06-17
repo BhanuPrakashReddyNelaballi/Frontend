@@ -1,5 +1,4 @@
 <div class="dashboard-wrapper">
-
   <!-- Header -->
   <header class="header-bar">
     <button class="menu-icon" (click)="toggleSidebar()">☰</button>
@@ -11,26 +10,36 @@
     </div>
   </header>
 
-  <!-- Sidebar Overlay -->
+  <!-- Sidebar Overlay (For Closing Sidebar on Click) -->
   <div class="sidebar-overlay" *ngIf="showSidebar" (click)="toggleSidebar()"></div>
 
   <!-- Sidebar -->
-  <aside class="sidebar" [class.open]="showSidebar">
+  <aside class="sidebar" [class.open]="showSidebar" [class.minimized]="isSidebarMinimized">
     <div class="sidebar-header">
-      <button class="close-btn" (click)="toggleSidebar()">×</button>
+      <button class="toggle-btn" (click)="toggleMinimizedSidebar()">☰</button>
+    </div>
+
+    <!-- Centered Member Name at Top -->
+    <div class="member-name">
       <p>{{ memberName }}</p>
     </div>
+
+    <!-- Navigation Menu -->
     <nav class="sidebar-menu">
-      <button (click)="goToProfile()">Profile</button>
-      <button (click)="navigateTo('borrow-transactions')">Borrow Transactions</button>
-      <button (click)="navigateTo('overdue')">Overdue & Fines</button>
-      <!-- Future options -->
+      <button [class.active]="currentPage === 'profile'" (click)="navigateTo('profile')">Profile</button>
+      <button [class.active]="currentPage === 'borrow-transactions'" (click)="navigateTo('borrow-transactions')">Borrow Transactions</button>
+      <button [class.active]="currentPage === 'overdue'" (click)="navigateTo('overdue')">Overdue & Fines</button>
     </nav>
+
+    <!-- Logout Button at Bottom -->
+    <div class="logout-section">
+      <button (click)="logout()">Logout</button>
+    </div>
   </aside>
 
   <!-- Main Body -->
   <main class="dashboard-body">
-    <h3>Welcome, {{ memberName }} 👋</h3>
+    <h3>Welcome, {{ memberName }}</h3>
     <p>Use the sidebar to manage your borrowing, check overdue books, and update your profile.</p>
   </main>
 </div>

@@ -29,4 +29,17 @@ export class AuthService{
 
   return this.http.get<MemberProfile>(`${this.baseUrl}/profile`, { headers });
 }
+logout(): Observable<string> {
+    const token = localStorage.getItem('jwt');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.post<string>(`${this.baseUrl}/logout`, {}, { headers });
+  }
+
+  clearSession(): void {
+    localStorage.removeItem('jwt');
+    localStorage.removeItem('role');
+  }
 }

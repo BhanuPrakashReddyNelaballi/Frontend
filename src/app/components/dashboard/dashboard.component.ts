@@ -13,6 +13,8 @@ import { AuthService } from '../../services/auth.service';
 export class DashboardComponent implements OnInit {
   memberName = '';
   showSidebar = false;
+  isSidebarMinimized = false;
+  currentPage = '';
 
   constructor(
     private authService: AuthService,
@@ -34,19 +36,26 @@ export class DashboardComponent implements OnInit {
     this.showSidebar = !this.showSidebar;
   }
 
-  goToProfile(): void {
-    this.router.navigate(['/profile']);
+  toggleMinimizedSidebar(): void {
+    this.isSidebarMinimized = !this.isSidebarMinimized;
   }
 
   navigateTo(path: string): void {
+    this.currentPage = path;
     this.router.navigate([`/${path}`]);
   }
 
-  onSearch(): void {
-    console.log('Search clicked');
-  }
-
-  onNotifications(): void {
-    console.log('Notifications clicked');
+  logout(): void {
+    this.authService.logout().subscribe({
+      next: () => {
+        this.authService.clearSession();
+        this.router.navigate(['/login']);
+      },
+      error: (err) => {
+        console.error('Logout failed:', err);
+        this.authService.clearSession();
+        this.router.navigate(['/login']);
+      }
+    });
   }
 }

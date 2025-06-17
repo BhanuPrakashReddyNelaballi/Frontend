@@ -51,39 +51,52 @@
   z-index: 900;                
 }
 
-
 /* Sidebar */
 .sidebar {
-  position: fixed;              /* Ensures it's over the page */
+  position: fixed;
   top: 0;
-  left: -260px;                 /* Initially hidden */
+  left: -260px;
   width: 260px;
   height: 100vh;
   background-color: #243447;
   color: white;
-  z-index: 1000;                /* On top of other content */
+  z-index: 1000;
   transition: left 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 20px;
 }
+
 .sidebar.open {
   left: 0;
 }
 
-.sidebar-header {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  margin-bottom: 20px;
+/* Collapsible Sidebar */
+.sidebar.minimized {
+  width: 60px;
 }
 
-.close-btn {
+.toggle-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
   background: none;
   border: none;
-  font-size: 22px;
-  color: #fff;
-  align-self: flex-end;
+  font-size: 24px;
   cursor: pointer;
 }
 
+/* Center Member Name */
+.member-name {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 15px 0;
+  border-bottom: 1px solid #3b4a5a;
+}
+
+/* Sidebar Menu with Hover Effect */
 .sidebar-menu button {
   display: block;
   width: 100%;
@@ -95,16 +108,37 @@
   font-size: 16px;
   cursor: pointer;
   border-radius: 5px;
-  transition: background 0.2s;
+  transition: background 0.3s ease, transform 0.2s;
 }
 
 .sidebar-menu button:hover {
   background: #3b4a5a;
+  transform: scale(1.05);
 }
 
-/* Body */
-.dashboard-body {
-  padding: 30px 20px;
-  position: relative;
-  z-index: 1;                  
+/* Active Page Indicator */
+.sidebar-menu button.active {
+  background: #1d2a36;
+  font-weight: bold;
+  border-left: 4px solid #ffcc00;
+}
+
+/* Logout Button */
+.logout-section {
+  text-align: center;
+}
+
+.logout-section button {
+  background-color: #ff4d4d;
+  border: none;
+  padding: 10px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 80%;
+}
+
+.logout-section button:hover {
+  background-color: #d43f3f;
 }
