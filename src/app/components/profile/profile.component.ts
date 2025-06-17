@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { MemberProfile } from '../../models/member-profile';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
- 
+
 @Component({
   selector: 'app-profile',
   standalone: true,
@@ -18,13 +18,17 @@ export class ProfileComponent implements OnInit {
   errorMessage = '';
   editMode = false;
   profileForm!: FormGroup;
- 
-  constructor(private authService: AuthService, private fb: FormBuilder) {}
- 
+
+  constructor(
+    private authService: AuthService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {}
+
   ngOnInit(): void {
     this.loadProfile();
   }
- 
+
   loadProfile() {
     this.authService.getProfile().subscribe({
       next: (profile) => {
@@ -43,11 +47,11 @@ export class ProfileComponent implements OnInit {
       }
     });
   }
- 
+
   enableEdit() {
     this.editMode = true;
   }
- 
+
   cancelEdit() {
     this.editMode = false;
     this.profileForm.patchValue({
@@ -56,10 +60,10 @@ export class ProfileComponent implements OnInit {
       address: this.member.address
     });
   }
- 
+
   saveChanges() {
     if (this.profileForm.invalid) return;
- 
+
     const updatedData = this.profileForm.value;
     this.authService.updateProfile(updatedData).subscribe({
       next: () => {
@@ -71,5 +75,21 @@ export class ProfileComponent implements OnInit {
       }
     });
   }
+
+  goTo(route: string) {
+    this.router.navigate([route]);
+  }
+
+  logout() {
+    this.authService.logout().subscribe({
+      next: () => {
+        this.authService.clearSession();
+        this.router.navigate(['/login']);
+      },
+      error: () => {
+        this.authService.clearSession();
+        this.router.navigate(['/login']);
+      }
+    });
+  }
 }
- 

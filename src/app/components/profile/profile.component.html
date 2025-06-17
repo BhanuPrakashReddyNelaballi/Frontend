@@ -1,29 +1,52 @@
-<div class="profile-card" *ngIf="!loading && !errorMessage && !editMode">
-  <h2>{{member.name}} Profile</h2>
-  <p><strong>Member ID:</strong> {{ member.id }}</p>
-  <p><strong>Name:</strong> {{ member.name }}</p>
-  <p><strong>Email:</strong> {{ member.email }}</p>
-  <p><strong>Phone:</strong> {{ member.phone }}</p>
-  <p><strong>Address:</strong> {{ member.address }}</p>
-  <p><strong>MemberShip Status:</strong> {{ member.membershipStatus }}</p>
-  <button (click)="enableEdit()"><i class="fa-solid fa-pen"></i> Edit</button>
+<div class="main-container">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="member-name">{{ member.name }} Profile</div>
+
+    <button (click)="goTo('/borrow-transactions')" class="nav-btn">Borrow Tracking</button>
+    <button (click)="goTo('/overdue')" class="nav-btn">Overdue & Fines</button>
+
+    <button (click)="logout()" class="logout-btn">Logout</button>
+  </aside>
+
+  <!-- Content Area -->
+  <div class="content-area">
+    <!-- View Mode -->
+    <div class="profile-card" *ngIf="!loading && !errorMessage && !editMode">
+      <h2>{{ member.name }} Profile</h2>
+      <p><strong>Member ID:</strong> {{ member.id }}</p>
+      <p><strong>Name:</strong> {{ member.name }}</p>
+      <p><strong>Email:</strong> {{ member.email }}</p>
+      <p><strong>Phone:</strong> {{ member.phone }}</p>
+      <p><strong>Address:</strong> {{ member.address }}</p>
+      <p><strong>Membership Status:</strong> {{ member.membershipStatus }}</p>
+
+      <div class="button-row">
+        <button (click)="enableEdit()" class="primary">Edit</button>
+      </div>
+    </div>
+
+    <!-- Edit Mode -->
+    <div class="profile-edit-card" *ngIf="!loading && !errorMessage && editMode">
+      <h2>Edit Profile</h2>
+      <form [formGroup]="profileForm" (ngSubmit)="saveChanges()">
+        <label for="name">Name</label>
+        <input id="name" formControlName="name" type="text" />
+
+        <label for="phone">Phone</label>
+        <input id="phone" formControlName="phone" type="text" />
+
+        <label for="address">Address</label>
+        <input id="address" formControlName="address" type="text" />
+
+        <div class="button-row">
+          <button type="submit" class="primary" [disabled]="profileForm.invalid">Save</button>
+          <button type="button" class="secondary" (click)="cancelEdit()">Cancel</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Error -->
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+  </div>
 </div>
- 
-<div class="profile-edit-card" *ngIf="!loading && !errorMessage && editMode">
-  <h2>Edit Profile</h2>
-  <form [formGroup]="profileForm" (ngSubmit)="saveChanges()">
-    <label>Name</label>
-    <input formControlName="name" type="text" />
- 
-    <label>Phone</label>
-    <input formControlName="phone" type="text" />
- 
-    <label>Address</label>
-    <input formControlName="address" type="text" />
- 
-    <button type="submit" [disabled]="profileForm.invalid">Save</button>
-    <button type="button" class="secondary" (click)="cancelEdit()">Cancel</button>
-  </form>
-</div>
- 
-<p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>

@@ -1,96 +1,132 @@
-.error-message {
-    color: red;
-    font-size: 1em;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 15px;
-    border: 2px solid red;
-    padding: 10px;
-    background-color: rgba(255, 0, 0, 0.1);
-    border-radius: 5px;
-  }
-  .success-message {
-  color: green;
-  font-size: 1em;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 15px;
-  border: 2px solid green;
-  padding: 10px;
-  background-color: rgba(0, 255, 0, 0.1);
-  border-radius: 5px;
+/* Container styling matching Register */
+.form-container, .login-container {
+  max-width: 480px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  box-sizing: border-box;
 }
-  .error-message::before {
-    content: "* "; /* Adds an asterisk before the message */
-    font-size: 1.2em;
-  }
-  
-  .error {
-    color: red;
-    font-size: 0.9em;
-    margin-top: 5px;
-  }
-  
-  .success {
-    color: green;
-    font-size: 0.9em;
-    margin-top: 5px;
-  }
-  
-  .form-container {
-    max-width: 360px;
-    margin: 60px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    background: #f8f9fa;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  label {
-    display: block;
-    font-weight: bold;
-    margin-top: 12px;
-    color: #34495e;
-  }
-  
-  input {
-    width: 100%;
-    padding: 8px;
-    margin-top: 4px;
-    border: 1px solid #bbb;
-    border-radius: 4px;
-  }
-  
-  button {
-    width: 100%;
-    background-color: #2c3e50;
-    color: white;
-    font-size: 16px;
-    padding: 10px;
-    margin-top: 20px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: #1a252f;
-  }
-  
-  .switch-link {
-    text-align: center;
-    margin-top: 15px;
-  }
-  
-  .switch-link a {
-    color: #2980b9;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  .switch-link a:hover {
-    text-decoration: underline;
-  }
-  
+
+/* Global box-sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Heading */
+h2 {
+  text-align: center;
+  font-family: 'Georgia', serif;
+  font-size: 1.75rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+/* Labels */
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #34495e;
+}
+
+/* Inputs */
+input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+}
+
+input:focus {
+  outline: none;
+  border-color: #2980b9;
+  box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.2);
+}
+
+/* Feedback messages */
+.error-message,
+.success-message,
+.error,
+.success {
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.error-message {
+  background-color: rgba(231, 76, 60, 0.1);
+  border: 1px solid #e74c3c;
+  color: #c0392b;
+  text-align: center;
+}
+
+.error-message::before {
+  content: "* ";
+  font-size: 1.2em;
+}
+
+.success-message {
+  background-color: rgba(46, 204, 113, 0.1);
+  border: 1px solid #2ecc71;
+  color: #27ae60;
+  text-align: center;
+}
+
+.error {
+  color: #e74c3c;
+  margin-top: 0.25rem;
+}
+
+.success {
+  color: #27ae60;
+  margin-top: 0.25rem;
+}
+
+/* Button styling */
+button {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  background-image: linear-gradient(135deg, #2980b9 0%, #6dd5fa 100%);
+  color: #fff;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Switch link */
+.switch-link {
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.switch-link a {
+  color: #2980b9;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.switch-link a:hover {
+  color: #1a5276;
+}

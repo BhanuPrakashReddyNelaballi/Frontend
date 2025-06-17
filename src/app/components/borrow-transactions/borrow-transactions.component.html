@@ -1,55 +1,74 @@
-<div class="borrow-transactions-container">
-  <h2>Borrowing Transactions - {{ memberName }}</h2>
+<div class="borrow-transactions-layout">
+  <div class="sidebar">
+    <div class="sidebar-top">
+      <h1>{{memberName}}</h1>
+      <h3> Borrow Tracking</h3>
+      <button class="tab-btn" [ngClass]="{ active: selectedTab === 'active' }" (click)="selectTab('active')">
+        Active Borrowed Books
+      </button>
+      <button class="tab-btn" [ngClass]="{ active: selectedTab === 'history' }" (click)="selectTab('history')">
+        Borrowing History
+      </button>
+    </div>
 
-  <section>
-    <h3>Active Borrowed Books</h3>
-    <table *ngIf="activeTransactions.length > 0; else noActive">
-      <thead>
-        <tr>
-          <th>Book ID</th>
-          <th>Borrow Date</th>
-          <th>Status</th>
-          <th>Return</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let tx of activeTransactions">
-          <td>{{ tx.book.bookId }}</td>
-          <td>{{ tx.borrowDate }}</td>
-          <td>{{ tx.status }}</td>
-          <td>
-            <button (click)="returnBook(tx.transactionID)">Return</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <ng-template #noActive>
-      <p>No active borrowed books.</p>
-    </ng-template>
-  </section>
+    <div class="sidebar-bottom">
+      <button class="back-btn" (click)="navigateToDashboard()">← Back to Dashboard</button>
+    </div>
+  </div>
 
-  <section>
-    <h3>Full Borrowing History</h3>
-    <table *ngIf="transactions.length > 0; else noHistory">
-      <thead>
-        <tr>
-          <th>Book ID</th>
-          <th>Borrow Date</th>
-          <th>Return Date</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let tx of transactions">
-          <td>{{ tx.book.bookId }}</td>
-          <td>{{ tx.borrowDate }}</td>
-          <td>{{ tx.returnDate || 'Not Returned' }}</td>
-          <td>{{ tx.status }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <ng-template #noHistory>
-      <p>No borrowing history found.</p>
-    </ng-template>
-  </section>
+  <div class="content">
+    <h2>{{ selectedTab === 'active' ? 'Active Borrowed Books' : 'Borrowing History' }}</h2>
+
+    <!-- Active Borrowed Books -->
+    <section *ngIf="selectedTab === 'active'">
+      <table *ngIf="activeTransactions.length > 0; else noActive">
+        <thead>
+          <tr>
+            <th>Book ID</th>
+            <th>Borrow Date</th>
+            <th>Status</th>
+            <th>Return</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tx of activeTransactions">
+            <td>{{ tx.book.bookId }}</td>
+            <td>{{ tx.borrowDate }}</td>
+            <td>{{ tx.status }}</td>
+            <td>
+              <button (click)="returnBook(tx.transactionID)">Return</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <ng-template #noActive>
+        <p>No active borrowed books.</p>
+      </ng-template>
+    </section>
+
+    <!-- Borrowing History -->
+    <section *ngIf="selectedTab === 'history'">
+      <table *ngIf="transactions.length > 0; else noHistory">
+        <thead>
+          <tr>
+            <th>Book ID</th>
+            <th>Borrow Date</th>
+            <th>Return Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tx of transactions">
+            <td>{{ tx.book.bookId }}</td>
+            <td>{{ tx.borrowDate }}</td>
+            <td>{{ tx.returnDate || 'Not Returned' }}</td>
+            <td>{{ tx.status }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <ng-template #noHistory>
+        <p>No borrowing history found.</p>
+      </ng-template>
+    </section>
+  </div>
 </div>
