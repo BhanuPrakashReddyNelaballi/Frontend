@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-
+ 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
@@ -11,16 +11,16 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+[x: string]: any;
   memberName = '';
   showSidebar = false;
-  isSidebarMinimized = false;
   currentPage = '';
-
+ 
   constructor(
     private authService: AuthService,
     private router: Router
   ) {}
-
+ 
   ngOnInit(): void {
     this.authService.getProfile().subscribe({
       next: (profile) => {
@@ -31,20 +31,18 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
-
+ 
+  /* Sidebar — mobile slide-in/out */
   toggleSidebar(): void {
     this.showSidebar = !this.showSidebar;
   }
-
-  toggleMinimizedSidebar(): void {
-    this.isSidebarMinimized = !this.isSidebarMinimized;
-  }
-
+ 
   navigateTo(path: string): void {
     this.currentPage = path;
     this.router.navigate([`/${path}`]);
+    this.showSidebar=false;
   }
-
+ 
   logout(): void {
     this.authService.logout().subscribe({
       next: () => {
