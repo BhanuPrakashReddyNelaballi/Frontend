@@ -1,8 +1,8 @@
 <div class="borrow-transactions-container">
-  <h2>📚 Borrowing Transactions - {{ memberName }}</h2>
+  <h2>Borrowing Transactions - {{ memberName }}</h2>
 
   <section>
-    <h3>🔄 Active Borrowed Books</h3>
+    <h3>Active Borrowed Books</h3>
     <table *ngIf="activeTransactions.length > 0; else noActive">
       <thead>
         <tr>
@@ -29,7 +29,7 @@
   </section>
 
   <section>
-    <h3>📜 Full Borrowing History</h3>
+    <h3>Full Borrowing History</h3>
     <table *ngIf="transactions.length > 0; else noHistory">
       <thead>
         <tr>

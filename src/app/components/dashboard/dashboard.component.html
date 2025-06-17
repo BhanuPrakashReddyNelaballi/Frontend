@@ -3,7 +3,7 @@
   <!-- Header -->
   <header class="header-bar">
     <button class="menu-icon" (click)="toggleSidebar()">☰</button>
-    <h2 class="dashboard-title">📚 Library Dashboard</h2>
+    <h2 class="dashboard-title">Library Dashboard</h2>
     <div class="header-right">
       <input type="text" placeholder="Search books..." class="search-input" />
       <span class="icon">🔔</span>
@@ -21,9 +21,9 @@
       <p>{{ memberName }}</p>
     </div>
     <nav class="sidebar-menu">
-      <button (click)="goToProfile()">👤 Profile</button>
-      <button (click)="navigateTo('borrow-transactions')">📖 Borrow Transactions</button>
-      <button (click)="navigateTo('overdue')">⚠️ Overdue & Fines</button>
+      <button (click)="goToProfile()">Profile</button>
+      <button (click)="navigateTo('borrow-transactions')">Borrow Transactions</button>
+      <button (click)="navigateTo('overdue')">Overdue & Fines</button>
       <!-- Future options -->
     </nav>
   </aside>
