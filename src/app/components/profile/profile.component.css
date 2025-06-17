@@ -1,78 +1,72 @@
-.profile-container {
-  max-width: 400px;
+.profile-card,
+.profile-edit-card {
+  max-width: 500px;
   margin: 40px auto;
-  padding: 20px;
-  background: #f8f9fa;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  background-color: #ffffff;
+  padding: 30px 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
 }
-
+ 
 h2 {
-  font-family: 'Georgia', serif;
-  color: #2c3e50;
-  margin-bottom: 15px;
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
 }
-
-/* Profile Details */
-.profile-details {
-  background: #ffffff;
-  padding: 15px;
-  border-radius: 6px;
+ 
+p {
+  font-size: 16px;
+  margin: 10px 0;
+  color: #555;
+}
+ 
+label {
+  display: block;
   margin-top: 15px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+  color: #333;
 }
-
-/* Row Layout */
-.profile-row {
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  padding: 1px;
-  font-size: 16px;
-}
-
-/* Labels */
-.label {
-  font-weight: bold;
-  color: #2c3e50;
-  width: 150px; /* Fixed width for uniformity */
-  text-align: left;
-}
-
-/* Values */
-.value {
-  text-align: left;
-  color: #34495e;
-}
-
-/* Button */
-button {
+ 
+input[type="text"] {
   width: 100%;
-  background-color: #2c3e50;
-  color: white;
-  font-size: 16px;
   padding: 10px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+ 
+button {
+  padding: 10px 20px;
+  margin-top: 20px;
+  margin-right: 10px;
+  background-color: #007bff;
+  color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: background 0.3s ease;
-  margin-top: 15px;
+  font-weight: 600;
+  transition: background-color 0.2s ease-in-out;
 }
-
+ 
 button:hover {
-  background-color: #1a252f;
+  background-color: #0056b3;
 }
-
-/* Error Message */
-.error-message {
+ 
+button.secondary {
+  background-color: #6c757d;
+}
+ 
+button.secondary:hover {
+  background-color: #5a6268;
+}
+ 
+.error {
   color: red;
-  font-size: 1em;
-  font-weight: bold;
   text-align: center;
-  margin-top: 12px;
-  border: 2px solid red;
-  padding: 8px;
-  background-color: rgba(255, 0, 0, 0.1);
-  border-radius: 5px;
+  margin-top: 20px;
 }
+ 

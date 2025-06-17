@@ -42,4 +42,12 @@ logout(): Observable<string> {
     localStorage.removeItem('jwt');
     localStorage.removeItem('role');
   }
+  updateProfile(profileData: Partial<MemberProfile>): Observable<string> {
+    const token = localStorage.getItem('jwt');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.put<string>(`${this.baseUrl}/profile`, profileData, { headers, responseType: 'text' as 'json' });
+  }
+   
 }
