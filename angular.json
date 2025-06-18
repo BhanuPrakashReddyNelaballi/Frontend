@@ -6,7 +6,7 @@
     "LibraryManagementSystem": {
       "projectType": "application",
       "schematics": {
-        "@schematics/angular:component": {"standalone": false}
+        "@schematics/angular:component": {"standalone": true}
       },
       "root": "",
       "sourceRoot": "src",
