@@ -51,8 +51,12 @@ export class LoginComponent {
         localStorage.setItem('jwt', res.token);
         localStorage.setItem('role', res.userRole);
         this.successMessage = 'Login successful! ';
+        const role=res.userRole?.toUpperCase();
         setTimeout(() => {
-          this.router.navigateByUrl('/dashboard');
+          if(role=='ADMIN'){
+            this.router.navigateByUrl('/admin-dashboard');
+          }else{
+          this.router.navigateByUrl('/dashboard');}
         }, 500);
       },
       error: err => {

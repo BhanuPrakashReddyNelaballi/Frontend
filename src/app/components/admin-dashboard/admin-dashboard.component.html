@@ -1,0 +1,39 @@
+<!-- src/app/components/admin-dashboard/admin-dashboard.component.html -->
+<div class="dashboard-container">
+ 
+    <!-- Sidebar -->
+    <aside class="sidebar" [class.closed]="!sidebarOpen">
+      <h2 class="logo" *ngIf="sidebarOpen">Library Admin</h2>
+      <nav>
+        <ul>
+          <li (click)="navigate('/admin-dashboard')" class="active">Dashboard</li>
+          <li (click)="navigate('/manage-books')">Manage Books</li>
+          <li (click)="navigate('/manage-members')">Manage Members</li>
+          <li (click)="navigate('/transactions')">Transactions</li>
+        </ul>
+      </nav>
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </aside>
+   
+    <!-- Main Content -->
+    <div class="main-area">
+      <!-- Topbar -->
+      <header class="topbar">
+        <button class="toggle-btn" (click)="toggleSidebar()">☰</button>
+        <span class="welcome">Welcome, <strong>{{ adminName }}</strong></span>
+      </header>
+   
+      <!-- Stats -->
+      <section class="stats">
+        <div class="card">
+          <h3>Total Books</h3>
+          <p>{{ stats.totalBooks }}</p>
+        </div>
+        <div class="card">
+          <h3>Total Members</h3>
+          <p>{{ stats.totalMembers }}</p>
+        </div>
+      </section>
+    </div>
+  </div>
+   
