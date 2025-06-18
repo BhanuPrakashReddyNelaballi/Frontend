@@ -1,1 +1,67 @@
-<p>overdue works!</p>
+<div class="page-wrapper">
+  <aside class="sidebar" [class.closed]="!sidebarOpen">
+        <h2 class="logo" *ngIf="sidebarOpen">Library Member</h2>
+        <nav>
+          <ul>
+            <li (click)="navigate('/dashboard')" >Dashboard</li>
+            <li (click)="navigate('/profile')">Profile</li>
+            <li (click)="navigate('/borrow-transactions')" >Borrow Tracking</li>
+            <li (click)="navigate('/overdue')" class="active">Overdue and Fine</li>
+          </ul>
+        </nav>
+        <button class="logout-btn" (click)="logout()">Logout</button>
+      </aside>
+
+  <div class="main-content">
+    <header class="topbar">
+      <button class="toggle-btn" (click)="toggleSidebar()">☰</button>
+      <span class="welcome"><strong>{{ memberName }}, </strong>Overdue and Fine</span>
+      <div class="view-switch">
+        <button [class.active]="selectedTab==='overdue'" (click)="selectTab('overdue')">Overdue</button>
+        <button [class.active]="selectedTab==='fine'" (click)="selectTab('fine')">Fine</button>
+      </div>
+    </header>
+
+    <section class="transactions-list">
+      <table *ngIf="selectedTab==='overdue'">
+        <thead>
+          <tr>
+            <th>TransactionID</th>
+            <th>Book ID</th>
+            <th>Title</th>
+            <th>Borrow Date</th>
+            <th>Due Date</th>
+            <th>Days Overdue</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tx of overdueTransactions">
+            <td>{{ tx.transactionID  }}</td>
+            <td>{{tx.book.bookId}}</td>
+            <td>{{ tx.book.title }}</td>
+            <td>{{ tx.borrowDate | date }}</td>
+            <td>{{ getDueDate(tx) | date }}</td>
+            <td>{{ daysOverdue(tx) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    <table *ngIf="selectedTab==='fine'">
+            <thead>
+          <tr><th>Fine ID</th><th>Amount</th><th>Status</th><th>Action</th></tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let fine of fines">
+            <td>{{ fine.fineID }}</td>
+            <td>₹{{ fine.amount }}</td>
+            <td>{{ fine.status}}</td>
+            <td><button 
+            *ngIf="fine.status === 'PENDING'" 
+            (click)="confirmPayment(fine.fineID)">
+            Pay
+          </button></td>
+          </tr>
+        </tbody>
+    </table>
+    </section>
+  </div>
+</div>

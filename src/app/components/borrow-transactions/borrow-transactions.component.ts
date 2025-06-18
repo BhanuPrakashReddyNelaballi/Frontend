@@ -15,6 +15,7 @@ export class BorrowTransactionsComponent implements OnInit {
   transactions: BorrowingTransaction[] = [];
   activeTransactions: BorrowingTransaction[] = [];
   memberName = '';
+  sidebarOpen = true;
   /** Which tab is shown: 'active' | 'history' */
   selectedTab: 'active' | 'history' = 'active';   // ⬅️ default view
 
@@ -23,7 +24,9 @@ export class BorrowTransactionsComponent implements OnInit {
     private authService: AuthService,
     private router :Router
   ) {}
-
+toggleSidebar(): void {
+    this.sidebarOpen = !this.sidebarOpen;
+  }
   ngOnInit(): void {
     this.authService.getProfile().subscribe({
       next: profile => {
@@ -51,9 +54,9 @@ export class BorrowTransactionsComponent implements OnInit {
   selectTab(tab: 'active' | 'history'): void {
     this.selectedTab = tab;
   }
-  navigateToDashboard(): void {
-  this.router.navigate(['/dashboard']);
-}
+  navigate(path: string): void {
+    this.router.navigateByUrl(path);
+  }
 
   /** Return a book and refresh lists */
   returnBook(transactionId: number): void {
@@ -63,5 +66,17 @@ export class BorrowTransactionsComponent implements OnInit {
         next: () => this.loadTransactions(),
         error: err => console.error('Failed to return book:', err)
       });
+  }
+  logout() {
+    this.authService.logout().subscribe({
+      next: () => {
+        this.authService.clearSession();
+        this.router.navigate(['/login']);
+      },
+      error: () => {
+        this.authService.clearSession();
+        this.router.navigate(['/login']);
+      }
+    });
   }
 }
