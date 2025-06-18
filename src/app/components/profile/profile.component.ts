@@ -18,6 +18,7 @@ export class ProfileComponent implements OnInit {
   errorMessage = '';
   editMode = false;
   profileForm!: FormGroup;
+  sidebarOpen = true;
 
   constructor(
     private authService: AuthService,
@@ -27,6 +28,9 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProfile();
+  }
+  toggleSidebar(): void {
+    this.sidebarOpen = !this.sidebarOpen;
   }
 
   loadProfile() {
@@ -76,8 +80,8 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  goTo(route: string) {
-    this.router.navigate([route]);
+  navigate(route: string) {
+    this.router.navigateByUrl(route);
   }
 
   logout() {

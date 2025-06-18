@@ -1,17 +1,25 @@
 <div class="main-container">
   <!-- Sidebar -->
-  <aside class="sidebar">
-    <div class="member-name">{{ member.name }} Profile</div>
-
-    <button (click)="goTo('/borrow-transactions')" class="nav-btn">Borrow Tracking</button>
-    <button (click)="goTo('/overdue')" class="nav-btn">Overdue & Fines</button>
-
-    <button (click)="logout()" class="logout-btn">Logout</button>
+  <aside class="sidebar" [class.closed]="!sidebarOpen">
+    <h2 class="logo" *ngIf="sidebarOpen">Library Member</h2>
+    <nav>
+      <ul>
+        <li (click)="navigate('/dashboard')" >Dashboard</li>
+        <li (click)="navigate('/profile')" class="active">Profile</li>
+        <li (click)="navigate('/borrow-transactions')">Borrow Tracking</li>
+        <li (click)="navigate('/overdue')">Overdue and Fine</li>
+      </ul>
+    </nav>
+    <button class="logout-btn" (click)="logout()">Logout</button>
   </aside>
 
   <!-- Content Area -->
-  <div class="content-area">
+  <div class="main-area">
     <!-- View Mode -->
+     <header class="topbar">
+      <button class="toggle-btn" (click)="toggleSidebar()">☰</button>
+        <span class="welcome"><strong>{{ member.name }}, Profile</strong></span>
+     </header>
     <div class="profile-card" *ngIf="!loading && !errorMessage && !editMode">
       <h2>{{ member.name }} Profile</h2>
       <p><strong>Member ID:</strong> {{ member.id }}</p>
