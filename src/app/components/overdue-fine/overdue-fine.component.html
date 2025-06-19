@@ -3,11 +3,11 @@
           <h2 class="logo" *ngIf="sidebarOpen">Library Admin</h2>
           <nav>
             <ul>
-              <li (click)="navigate('/admin-dashboard')" class="active">Dashboard</li>
+              <li (click)="navigate('/admin-dashboard')" >Dashboard</li>
               <li (click)="navigate('/manage-books')">Manage Books</li>
               <li (click)="navigate('/manage-members')">Manage Members</li>
               <li (click)="navigate('/transactions')">Transactions</li>
-              <li (click)="navigate('/overduefine')">Overdue and Fine</li>
+              <li (click)="navigate('/overduefine')"class="active">Overdue and Fine</li>
     
             </ul>
           </nav>

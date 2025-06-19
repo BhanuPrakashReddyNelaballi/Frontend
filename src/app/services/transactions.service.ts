@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BorrowingTransaction } from '../models/borrowing-transaction.model';
-
+import { BorrowingDto } from '../models/borrowing-dto.model';
 @Injectable({ providedIn: 'root' })
 export class TransactionsService {
   private baseUrl = 'http://localhost:8080/api/transactions';
@@ -14,5 +14,8 @@ export class TransactionsService {
   }
   getOverDueTransactions(): Observable<BorrowingTransaction[]>{
     return this.http.get<BorrowingTransaction[]>(`${this.baseUrl}/overdue`);
+  }
+  getAll(): Observable<BorrowingDto[]> {
+    return this.http.get<BorrowingDto[]>(`${this.baseUrl}/all`);
   }
 }

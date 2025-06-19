@@ -1,1 +1,57 @@
-<p>transactions works!</p>
+<div class="dashboard-wrapper">
+    <aside [class.closed]="!sidebarOpen" class="sidebar">
+        <h2 class="logo" *ngIf="sidebarOpen">Library Admin</h2>
+      <nav>
+        <ul>
+          <li (click)="navigate('/admin-dashboard')" >Dashboard</li>
+          <li (click)="navigate('/manage-books')">Manage Books</li>
+          <li (click)="navigate('/manage-members')">Manage Members</li>
+          <li (click)="navigate('/transactions')"class="active">Transactions</li>
+          <li (click)="navigate('/overduefine')">Overdue and Fine</li>
+
+        </ul>
+      </nav>
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </aside>
+   
+    <main class="main-content">
+      <header class="topbar">
+        <button class="toggle-btn" (click)="toggleSidebar()">☰</button>
+        <span class="welcome"><strong>Members </strong>Borrow Tracking</span>
+        <div class="filters">
+          <select [(ngModel)]="selectedStatus" (change)="onStatusChange()">
+            <option *ngFor="let s of statuses" [value]="s">{{s}}</option>
+          </select>
+          <input type="text" placeholder="Member ID" [(ngModel)]="searchMemberId" (input)="onSearchChange()" />
+        </div>
+      </header>
+   
+      <section class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Tx ID</th>
+              <th>Book ID</th>
+              <th>Member ID</th>
+              <th>Borrow Date</th>
+              <th>Return Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let tx of filtered" [class.overdue]="tx.status==='RETURNED'">
+              <td>{{ tx.transactionId }}</td>
+              <td>{{ tx.bookId }}</td>
+              <td>{{ tx.memberId }}</td>
+              <td>{{ tx.borrowDate | date }}</td>
+              <td>{{ tx.returnDate ? (tx.returnDate | date) : '—' }}</td>
+              <td>{{ tx.status }}</td>
+              <!-- <td>
+                <button *ngIf="tx.status !== 'RETURNED'" (click)="markReturned(tx)">Return</button>
+              </td> -->
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
