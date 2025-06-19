@@ -1,0 +1,157 @@
+.dashboard-wrapper {
+    display: flex;
+    height: 100vh;
+    margin: 0;
+  }
+   
+  /* Sidebar */
+  .sidebar {
+    width: 220px;
+    background: #2c3e50;
+    color: #fff;
+    display: flex;
+    position: relative  ;
+    flex-direction: column;
+    transition: width 0.3s ease;
+  }
+  .sidebar.closed {
+    width: 0;
+    overflow: hidden;
+  }
+  .sidebar .logo {
+    padding: 20px;
+    font-size: 1.4rem;
+  }
+  .sidebar nav {
+    flex-grow: 1;
+  }
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .sidebar li {
+    padding: 12px 20px;
+    cursor: pointer;
+  }
+  .sidebar li:hover,
+  .sidebar li.active {
+    background: #34495e;
+  }
+  .logout-btn {
+    margin: 20px;
+    padding: 10px;
+    background: #c0392b;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  .filters{ 
+    margin-left: auto; 
+    display: flex; 
+    gap: 10px; 
+  }
+.main-content { 
+  flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+   }
+.topbar {
+    display: flex;
+    position: relative;
+    align-items: center;
+    background: #fff;
+    padding: 25px 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+.toggle-btn {
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-right: 20px;
+  }
+  .welcome {
+    font-size: 1.1rem;
+  }
+.search-input {
+  margin-left: auto;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 250px;
+  font-size: 1rem;
+}.members-table { padding:20px 24px; overflow-y:auto; }
+.filter-select{margin-left:auto;padding:6px 12px;border:1px solid #ccc;border-radius:4px;}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+th, td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+/* Header row */
+th {
+  background: #f1f5f9;
+}
+
+/* ▶ Hover effect on body rows */
+tbody tr:hover {
+  background-color: #f9fafb;
+  cursor: pointer;
+}
+/* Action button styles */
+.btn-edit {
+  background-color: #3b82f6; /* blue */
+  color: white;
+}
+.btn-delete {
+  background-color: #dc2626; /* red */
+  color: white;
+}
+.btn-status {
+  background-color: #f59e0b; /* amber */
+  color: white;
+}
+.btn-save {
+  background-color: #16a34a; /* green */
+  color: white;
+}
+.btn-cancel {
+  background-color: #6b7280; /* gray */
+  color: white;
+}
+
+.btn-edit:hover,
+.btn-status:hover {
+  background-color: #2563eb;
+}
+.btn-save:hover {
+  background-color: #15803d;
+}
+.btn-delete:hover {
+  background-color: #b91c1c;
+}
+.btn-cancel:hover {
+  background-color: #4b5563;
+}
+
+/* Uniform spacing */
+.members-table td > button {
+  margin-right: 8px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.members-table td > button:last-child {
+  margin-right: 0;
+}

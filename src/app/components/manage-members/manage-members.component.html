@@ -1,1 +1,82 @@
-<p>manage-members works!</p>
+<div class="dashboard-wrapper">
+  <aside class="sidebar" [class.closed]="!sidebarOpen">
+          <h2 class="logo" *ngIf="sidebarOpen">Library Admin</h2>
+          <nav>
+            <ul>
+              <li (click)="navigate('/admin-dashboard')" >Dashboard</li>
+              <li (click)="navigate('/manage-books')">Manage Books</li>
+              <li (click)="navigate('/manage-members')"class="active">Manage Members</li>
+              <li (click)="navigate('/transactions')">Transactions</li>
+              <li (click)="navigate('/overduefine')">Overdue and Fine</li>
+    
+            </ul>
+          </nav>
+          <button class="logout-btn" (click)="logout()">Logout</button>
+        </aside>
+
+  <main class="main-content">
+    <header class="topbar">
+      <button class="toggle-btn" (click)="toggleSidebar()">☰</button>
+        <span class="welcome"><strong>Members </strong>Management</span>
+        <div class="filters">
+          <select [(ngModel)]="searchField" (change)="applyFilter()" class="filter-select">
+        <option value="all">All</option>
+        <option value="memberId">ID</option>
+        <option value="name">Name</option>
+        <option value="email">Email</option>
+      </select>
+<input
+        class="search-input"
+        placeholder="Search by any field..."
+        [(ngModel)]="searchTerm"
+        (input)="applyFilter()"
+      />      </div>
+    </header>
+
+    <section class="members-table">
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Name</th><th>Phone</th><th>Address</th><th>Email</th><th>Status</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let m of filtered">
+            <td>{{ m.memberId }}</td>
+            <!-- Name -->
+            <td *ngIf="editingMemberId !== m.memberId">{{ m.name }}</td>
+            <td *ngIf="editingMemberId === m.memberId">
+              <input [(ngModel)]="editData.name" />
+            </td>
+            <td *ngIf="editingMemberId !== m.memberId">{{ m.phone }}</td>
+            <td *ngIf="editingMemberId === m.memberId">
+              <input [(ngModel)]="editData.phone" />
+            </td>
+            <td *ngIf="editingMemberId !== m.memberId">{{ m.address }}</td>
+            <td *ngIf="editingMemberId === m.memberId">
+                <input [(ngModel)]="editData.address" />
+
+            </td>
+            <td>{{ m.email }}</td>
+            <td>{{ m.membershipStatus }}</td>
+
+
+            <!-- Actions -->
+            <td>
+              <ng-container *ngIf="editingMemberId !== m.memberId">
+  <button class="btn-edit"    (click)="startEdit(m)">Edit</button>
+  <button class="btn-delete"  (click)="deleteMember(m)">Delete</button>
+  <button class="btn-status"  (click)="changeStatus(m.memberId, m.membershipStatus === 'ACTIVE' ? 'INACTIVE' : 'ACTIVE')">
+    {{ m.membershipStatus === 'ACTIVE' ? 'Deactivate' : 'Activate' }}
+  </button>
+</ng-container>
+<ng-container *ngIf="editingMemberId === m.memberId">
+  <button class="btn-save"    (click)="saveEdit(m.memberId)">Save</button>
+  <button class="btn-cancel"  (click)="cancelEdit()">Cancel</button>
+</ng-container>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</div>

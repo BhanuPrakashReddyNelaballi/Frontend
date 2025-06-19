@@ -1,1 +1,94 @@
-<p>manage-books works!</p>
+<div class="dashboard-wrapper">
+  <aside class="sidebar" [class.closed]="!sidebarOpen">
+          <h2 class="logo" *ngIf="sidebarOpen">Library Admin</h2>
+          <nav>
+            <ul>
+              <li (click)="navigate('/admin-dashboard')" >Dashboard</li>
+              <li (click)="navigate('/manage-books')" class="active">Manage Books</li>
+              <li (click)="navigate('/manage-members')">Manage Members</li>
+              <li (click)="navigate('/transactions')">Transactions</li>
+              <li (click)="navigate('/overduefine')">Overdue and Fine</li>
+    
+            </ul>
+          </nav>
+          <button class="logout-btn" (click)="logout()">Logout</button>
+        </aside>
+  <main class="main-content">
+    <header class="topbar">
+      <button class="toggle-btn" (click)="toggleSidebar()">☰</button>
+        <span class="welcome"><strong>Books </strong>Management</span>
+        <div class="filters">
+        <select [(ngModel)]="searchField" (change)="applyFilter()" class="filter-select">
+        <option value="all">All</option>
+        <option value="bookId">ID</option>
+        <option value="title">Title</option>
+        <option value="author">Author</option>
+        <option value="genre">Genre</option>
+        <option value="yearPublished">Year</option>
+      </select>
+      <input
+        class="search-input"
+        placeholder="Search by any field..."
+        [(ngModel)]="searchTerm"
+        (input)="applyFilter()"
+      />
+      <button class="btn-save" (click)="showAdd = !showAdd">
+        {{ showAdd ? 'Close' : 'Add Book' }}
+      </button>
+        </div>
+    </header>
+
+    <!-- Add form -->
+    <section *ngIf="showAdd" class="add-form">
+      <input placeholder="Title" [(ngModel)]="newBook.title" />
+      <input placeholder="Author" [(ngModel)]="newBook.author" />
+      <input placeholder="Genre" [(ngModel)]="newBook.genre" />
+      <input placeholder="ISBN" [(ngModel)]="newBook.isbn" />
+      <input type="number" placeholder="Year" [(ngModel)]="newBook.yearPublished" />
+      <input type="number" placeholder="Available" [(ngModel)]="newBook.availableCopies" />
+      <button class="btn-save" (click)="saveNew()">Save</button>
+    </section>
+
+    <!-- Books table -->
+    <section class="books-table">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>ISBN</th>
+            <th>Year</th>
+            <th>Available</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let b of filtered">
+            <td>{{ b.bookId }}</td>
+            <td>{{ b.title }}</td>
+            <td>{{ b.author }}</td>
+            <td>{{ b.genre }}</td>
+            <td>{{ b.isbn }}</td>
+            <td>{{ b.yearPublished }}</td>
+            <td *ngIf="editingId !== b.bookId">{{ b.availableCopies }}</td>
+            <td *ngIf="editingId === b.bookId">
+              <input type="number" [(ngModel)]="editAvailable" style="width: 70px" />
+            </td>
+            <td>
+              <ng-container *ngIf="editingId !== b.bookId">
+                <button class="btn-edit" (click)="startEdit(b)">Edit Copies</button>
+                <button class="btn-delete" (click)="deleteBook(b)">Delete</button>
+              </ng-container>
+              <ng-container *ngIf="editingId === b.bookId">
+                <button class="btn-save" (click)="updateCopies(b.bookId)">Save</button>
+                <button class="btn-cancel" (click)="cancelEdit()">Cancel</button>
+              </ng-container>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</div>

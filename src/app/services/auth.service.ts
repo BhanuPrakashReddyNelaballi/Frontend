@@ -22,7 +22,7 @@ export class AuthService{
             );
           }
     getProfile(): Observable<MemberProfile> {
-  const token = localStorage.getItem('token'); // or sessionStorage
+  const token = localStorage.getItem('jwt'); // or sessionStorage
   const headers = new HttpHeaders({
     'Authorization': `Bearer ${token}`
   });
@@ -42,12 +42,12 @@ logout(): Observable<string> {
     localStorage.removeItem('jwt');
     localStorage.removeItem('role');
   }
-  updateProfile(profileData: Partial<MemberProfile>): Observable<string> {
+  updateProfile(updatedProfile: Partial<MemberProfile>): Observable<MemberProfile> {
     const token = localStorage.getItem('jwt');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.put<string>(`${this.baseUrl}/profile`, profileData, { headers, responseType: 'text' as 'json' });
+
+    return this.http.put<MemberProfile>(`${this.baseUrl}/profile`, updatedProfile, { headers });
   }
-   
 }
