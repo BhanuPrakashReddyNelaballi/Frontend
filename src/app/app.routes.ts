@@ -10,6 +10,7 @@ import { TransactionsComponent } from './components/transactions/transactions.co
 import { ManageMembersComponent } from './components/manage-members/manage-members.component';
 import { ManageBooksComponent } from './components/manage-books/manage-books.component';
 import { MemberDashboardComponent } from './components/member-dashboard/member-dashboard.component';
+import { OverdueFineComponent } from './components/overdue-fine/overdue-fine.component';
 export const routes: Routes = [
   // Default redirect to login
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -30,9 +31,14 @@ export const routes: Routes = [
     component: AdminDashboardComponent,
     canActivate: [AdminGuard]
   },
-  {path:'manage-members', component:ManageMembersComponent},
-  {path:'manage-books',component:ManageBooksComponent},
-  {path:'transactions',component:TransactionsComponent},
+  {
+    path: 'overduefine',
+    component: OverdueFineComponent,
+    canActivate: [AdminGuard]
+  },
+  {path:'manage-members', component:ManageMembersComponent,canActivate: [AdminGuard]},
+  {path:'manage-books',component:ManageBooksComponent, canActivate: [AdminGuard]},
+  {path:'transactions',component:TransactionsComponent,canActivate: [AdminGuard]},
  
 
 ];

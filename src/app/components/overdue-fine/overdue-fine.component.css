@@ -1,0 +1,116 @@
+.page-wrapper {
+    display: flex;
+    height: 100vh;
+    margin: 0;
+  }
+   
+  /* Sidebar */
+  .sidebar {
+    width: 220px;
+    background: #2c3e50;
+    color: #fff;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    transition: width 0.3s ease;
+  }
+  .sidebar.closed {
+    width: 0;
+    overflow: hidden;
+  }
+  .sidebar .logo {
+    padding: 20px;
+    font-size: 1.4rem;
+  }
+  .sidebar nav {
+    flex-grow: 1;
+  }
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .sidebar li {
+    padding: 12px 20px;
+    cursor: pointer;
+  }
+  .sidebar li:hover,
+  .sidebar li.active {
+    background: #34495e;
+  }
+  .logout-btn {
+    margin: 20px;
+    padding: 10px;
+    background: #c0392b;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+.main-content { 
+  flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+   }
+.topbar {
+    display: flex;
+    position: relative;
+    align-items: center;
+    background: #fff;
+    padding: 25px 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+.toggle-btn {
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-right: 20px;
+  }
+  .welcome {
+    font-size: 1.1rem;
+  }
+.view-switch { 
+  margin-left: auto; 
+  display: flex; 
+  gap: 10px; 
+}
+.view-switch button { 
+  padding: 8px 12px; 
+  border: none; 
+  background: 
+  #e5e7eb; 
+  border-radius: 4px; 
+  cursor: pointer; 
+}
+.view-switch button.active { 
+  background: 
+  #34495e; 
+  color: white; 
+}
+.transactions-list { 
+  padding: 20px; 
+  overflow-y: auto; 
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+th, td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+/* Header row */
+th {
+  background: #f1f5f9;
+}
+
+/* ▶ Hover effect on body rows */
+tbody tr:hover {
+  background-color: #f9fafb;
+  cursor: pointer;
+}

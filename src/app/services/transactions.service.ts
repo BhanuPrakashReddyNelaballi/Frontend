@@ -9,8 +9,10 @@ export class TransactionsService {
 
   constructor(private http: HttpClient) {}
 
-  /** fetch all transactions for current member */
   getMyTransactions(): Observable<BorrowingTransaction[]> {
     return this.http.get<BorrowingTransaction[]>(`${this.baseUrl}/my-transactions`);
+  }
+  getOverDueTransactions(): Observable<BorrowingTransaction[]>{
+    return this.http.get<BorrowingTransaction[]>(`${this.baseUrl}/overdue`);
   }
 }

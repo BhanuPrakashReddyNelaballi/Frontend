@@ -8,4 +8,7 @@ export interface BorrowingTransaction {
     bookId: number;
     title?: string;
   };
+  member:{
+    memberId: number;
+  };
 }

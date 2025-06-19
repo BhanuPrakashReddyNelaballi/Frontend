@@ -18,4 +18,10 @@ export class FinesService {
   payFine(fineId: number): Observable<Fine> {
     return this.http.post<Fine>(`${this.baseUrl}/pay`, { fineId });
   }
+  getPendingFines(): Observable<Fine[]>{
+    return this.http.get<Fine[]>(`${this.baseUrl}/pending`);
+  }
+  // calcuateFine(): void{
+  //    return this.http.get(`${this.baseUrl}/calculate`);
+  // }
 }

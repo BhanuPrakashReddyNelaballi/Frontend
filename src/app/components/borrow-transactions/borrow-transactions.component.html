@@ -17,7 +17,7 @@
   <div class="main-content">
     <header class="topbar">
       <button class="toggle-btn" (click)="toggleSidebar()">☰</button>
-      <span class="welcome"><strong>{{ memberName }}, </strong>Borrow Tracking</span>
+      <span class="welcome"><strong>{{ memberName }}'s </strong>Borrow Tracking</span>
       <div class="view-switch">
         <button [class.active]="selectedTab==='active'" (click)="selectTab('active')">Active Borrow</button>
         <button [class.active]="selectedTab==='history'" (click)="selectTab('history')">Borrow History</button>

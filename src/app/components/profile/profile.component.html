@@ -18,7 +18,7 @@
     <!-- View Mode -->
      <header class="topbar">
       <button class="toggle-btn" (click)="toggleSidebar()">☰</button>
-<span class="welcome" *ngIf="member"><strong>{{ member.name }}, </strong>Profile</span>
+<span class="welcome" *ngIf="member"><strong>{{ member.name }}'s </strong>Profile</span>
      </header>
     <div class="profile-card" *ngIf="!loading && !errorMessage && !editMode">
       <h2>{{ member.name }} Profile</h2>
