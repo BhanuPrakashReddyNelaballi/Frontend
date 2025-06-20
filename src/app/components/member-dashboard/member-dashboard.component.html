@@ -1,33 +1,59 @@
+<!-- src/app/components/admin-dashboard/admin-dashboard.component.html -->
 <div class="dashboard-container">
-    <!-- Sidebar -->
-    <aside class="sidebar" [class.closed]="!sidebarOpen">
-        <h2 class="logo" *ngIf="sidebarOpen">Library Member</h2>
-        <nav>
-          <ul>
-            <li (click)="navigate('/dashboard')" class="active">Dashboard</li>
-            <li (click)="navigate('/profile')">Profile</li>
-            <li (click)="navigate('/borrow-transactions')">Borrow Tracking</li>
-            <li (click)="navigate('/overdue')">Overdue and Fine</li>
-          </ul>
-        </nav>
-        <button class="logout-btn" (click)="logout()">Logout</button>
-      </aside>
-   
-    <!-- Main Content -->
-    <div class="main-area">
-      <!-- Topbar -->
-      <header class="topbar">
-        <button class="toggle-btn" (click)="toggleSidebar()">☰</button>
-        <span class="welcome">Welcome, <strong>{{ memberName }}</strong></span>
-        <div class="spacer"></div>
-        <input type="text" [(ngModel)]="searchTerm" placeholder="Search…" class="search-input" (keyup.enter)="onSearch()" />
-        <button class="notif-btn" aria-label="Notifications">🔔</button>
-      </header>
-   
-      <!-- Member Content Area -->
-      <section class="content-area">
-        <!-- e.g., quick stats, recent borrows, etc. -->
-        <p>Your member-specific dashboard content goes here.</p>
-      </section>
-    </div>
-  </div>
+ 
+  <!-- Sidebar -->
+  <aside class="sidebar" [class.closed]="!sidebarOpen">
+    <h2 class="logo" *ngIf="sidebarOpen">Library Member</h2>
+    <nav>
+      <ul>
+        <li (click)="navigate('/dashboard')" class="active" >Home</li>
+        <li (click)="navigate('/profile')">Profile</li>
+        <li (click)="navigate('/search & browse')">Search & Browse</li>
+        <li (click)="navigate('/borrow-transactions')" >Borrow Tracking</li>
+        <li (click)="navigate('/overdue')" >Overdue and Fine</li>
+      </ul>
+    </nav>
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </aside>
+ 
+  <!-- Main Content -->
+  <div class="main-area">
+    <!-- Topbar -->
+    <header class="topbar">
+      <button class="toggle-btn" (click)="toggleSidebar()">☰</button>
+      <span class="welcome" ><strong>{{ memberName }}'s </strong>Dashboard</span>
+      <div class="spacer"></div>
+      <div class="notification-icon" (click)="toggleNotifications()">
+        🔔
+        <span *ngIf="notifications.length" class="badge">{{ notifications.length }}</span>
+      </div>
+     </header>
+ 
+    <!-- Stats -->
+    <section class="stats-cards">
+      <div class="card">
+        <h3>Total Borrowed</h3>
+        <p>{{ stats.totalBorrowed }}</p>
+      </div>
+      <div class="card">
+        <h3>Overdue</h3>
+        <p>{{ stats.overdueCount }}</p>
+      </div>
+      <div class="card">
+        <h3>Pending Fines</h3>
+        <p>{{ stats.pendingFines }}</p>
+      </div>
+    </section>
+ 
+    <!-- Notifications Panel -->
+    <section *ngIf="showNotifications" class="notifications-panel">
+      <h4>Notifications</h4>
+      <ul>
+        <li *ngFor="let n of notifications" [class.unread]="!n.read">
+          <span class="msg">{{ n.message }}</span>
+          <span class="date">{{ n.date | date:'string' }}</span>
+        </li>
+      </ul>
+    </section>
+</div>
+</div>

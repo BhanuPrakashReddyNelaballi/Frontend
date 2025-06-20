@@ -1,0 +1,61 @@
+<div class="dashboard-container">
+ 
+    <!-- Sidebar -->
+    <aside class="sidebar" [class.closed]="!sidebarOpen">
+      <h2 class="logo" *ngIf="sidebarOpen">Library Member</h2>
+      <nav>
+        <ul>
+          <li (click)="navigate('/dashboard')" >Home</li>
+          <li (click)="navigate('/profile')">Profile</li>
+          <li (click)="navigate('/search & browse')" class="active" >Search & Browse</li>
+          <li (click)="navigate('/borrow-transactions')" >Borrow Tracking</li>
+          <li (click)="navigate('/overdue')" >Overdue and Fine</li>
+        </ul>
+      </nav>
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </aside>
+    <main class="main-content">
+        <header class="topbar">
+          <button class="toggle-btn" (click)="toggleSidebar()">☰</button>
+            <span class="welcome"><strong>Search & Browse </strong></span>
+            <div class="filters">
+               <select [(ngModel)]="searchField" (change)="applyFilter()" class="filter-select">
+                    <option value="all">All</option>
+                    <option value="title">Title</option>
+                    <option value="author">Author</option>
+                    <option value="genre">Genre</option>
+                </select>
+                <input
+                    class="search-input" placeholder="Search by any field..." [(ngModel)]="searchTerm" (input)="applyFilter()"/>
+            </div>
+        </header>
+        <section class="books-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Title</th>
+                  <th>Author</th>
+                  <th>Genre</th>
+                  <th>ISBN</th>
+                  <th>Year</th>
+                  <th>Available</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let b of filtered">
+                  <td>{{ b.bookId }}</td>
+                  <td>{{ b.title }}</td>
+                  <td>{{ b.author }}</td>
+                  <td>{{ b.genre }}</td>
+                  <td>{{ b.isbn }}</td>
+                  <td>{{ b.yearPublished }}</td>
+                  <td>{{b.availableCopies}}</td>
+                  <td><button [disabled]="b.availableCopies===0" (click)="borrow(b)">{{b.availableCopies>0?'Borrow':'Unavailable'}}</button></td>
+                  </tr>
+              </tbody>
+              </table>
+              </section>
+    </main>
+</div>

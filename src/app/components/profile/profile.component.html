@@ -4,8 +4,9 @@
     <h2 class="logo" *ngIf="sidebarOpen">Library Member</h2>
     <nav>
       <ul>
-        <li (click)="navigate('/dashboard')" >Dashboard</li>
+        <li (click)="navigate('/dashboard')" >Home</li>
         <li (click)="navigate('/profile')" class="active">Profile</li>
+        <li (click)="navigate('/search & browse')">Search & Browse</li>
         <li (click)="navigate('/borrow-transactions')">Borrow Tracking</li>
         <li (click)="navigate('/overdue')">Overdue and Fine</li>
       </ul>

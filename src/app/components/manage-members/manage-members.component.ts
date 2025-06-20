@@ -43,7 +43,7 @@ export class ManageMembersComponent implements OnInit {
   loadMembers(): void {
     this.memberService.getAllMembers().subscribe({
       next: list => {
-        this.members = list;
+        this.members = list.filter(mx=> mx.userRole === 'MEMBER');
         this.applyFilter();
       }, error: err => console.error(err)
     });

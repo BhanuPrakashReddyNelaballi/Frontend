@@ -11,6 +11,7 @@ import { ManageMembersComponent } from './components/manage-members/manage-membe
 import { ManageBooksComponent } from './components/manage-books/manage-books.component';
 import { MemberDashboardComponent } from './components/member-dashboard/member-dashboard.component';
 import { OverdueFineComponent } from './components/overdue-fine/overdue-fine.component';
+import { SearchBrowseComponent } from './components/search-browse/search-browse.component';
 export const routes: Routes = [
   // Default redirect to login
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -24,7 +25,8 @@ export const routes: Routes = [
   { path: 'profile',            component: ProfileComponent },
   { path: 'borrow-transactions', component: BorrowTransactionsComponent },
   { path: 'overdue',            component: OverdueComponent },
- 
+  { path: 'search & browse',     component: SearchBrowseComponent },
+
   // Admin-only route
   {
     path: 'admin-dashboard',

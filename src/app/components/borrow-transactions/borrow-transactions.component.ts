@@ -63,7 +63,9 @@ toggleSidebar(): void {
     this.http
       .post('http://localhost:8080/api/transactions/return', { transactionId })
       .subscribe({
-        next: () => this.loadTransactions(),
+        next: () => {
+          alert("Book Returned");
+          this.loadTransactions()},
         error: err => console.error('Failed to return book:', err)
       });
   }

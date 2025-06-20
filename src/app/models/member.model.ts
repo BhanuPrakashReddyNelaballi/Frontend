@@ -5,4 +5,5 @@ export interface Member {
   phone: string;
   address: string;
   membershipStatus: 'ACTIVE' | 'INACTIVE';
+  userRole: 'ADMIN' | 'MEMBER';
 }
