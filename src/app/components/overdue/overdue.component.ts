@@ -104,6 +104,7 @@ export class OverdueComponent implements OnInit {
   confirmPayment(fineId:number): void {
       this.finesService.payFine(fineId).subscribe({
         next: () => {
+          alert("Payment over")
           this.loadFines();
         },
         error: err => console.error('Payment failed', err)
